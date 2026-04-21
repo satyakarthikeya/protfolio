@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio of P P Satya Karthikeya, an AI and MLOps engineer building production-ready ML systems across computer vision, LLM fine-tuning, edge AI, and medical AI.">
+<meta property="og:title" content="Satya Karthikeya — AI & MLOps Engineer">
+<meta property="og:description" content="AI and MLOps portfolio featuring edge computer vision, LLM fine-tuning, medical AI, FastAPI, Docker, ONNX, and TensorRT projects.">
+<meta property="og:type" content="website">
+<title>Satya Karthikeya — AI & MLOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:           #09090c;
+  --bg-card:      #121215;
+  --bg-card-2:    #1a1a1f;
+  --orange:       #f97316;
+  --orange-soft:  rgba(249,115,22,0.1);
+  --orange-glow:  rgba(249,115,22,0.25);
+  --violet:       #8b5cf6;
+  --violet-soft:  rgba(139,92,246,0.1);
+  --green:        #22c55e;
+  --green-soft:   rgba(34,197,94,0.1);
+  --text:         #f0eef4;
+  --text-2:       #9997a6;
+  --text-3:       #4a4855;
+  --border:       rgba(255,255,255,0.07);
+  --border-2:     rgba(255,255,255,0.14);
+  --r:            10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── SCROLL PROGRESS ─────────────────────────────────────────────────────── */
+#sp {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: var(--orange);
+  z-index: 9999;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 8px var(--orange-glow);
+}
+
+/* ─── NAV ─────────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  height: 62px;
+  background: rgba(9,9,12,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+.nav-logo span { color: var(--orange); }
+
+.nav-links {
+  display: flex;
+  gap: 2.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.2px;
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--text); }
+
+.nav-links a.active {
+  position: relative;
+}
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1.5px;
+  background: var(--orange);
+  border-radius: 99px;
+}
+
+/* ─── HERO ────────────────────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 8rem 3rem 4rem;
+  position: relative;
+}
+
+/* subtle warm glow behind bento */
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 10%; right: -100px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(249,115,22,0.055) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-left { position: relative; z-index: 1; }
+.hero-right { position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--green);
+  background: var(--green-soft);
+  border: 1px solid rgba(34,197,94,0.2);
+  padding: 0.3rem 0.75rem;
+  border-radius: 99px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: dot-pulse 1.8s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(34,197,94,0.4);
+}
+
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+  60%       { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+}
+
+.hero-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.6rem, 6.5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-name .highlight { color: var(--orange); }
+
+.hero-role {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 500;
+  color: var(--text-2);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.01em;
+}
+
+.hero-desc {
+  font-size: 1.02rem;
+  color: var(--text-2);
+  line-height: 1.8;
+  max-width: 500px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.btn-main {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0.72rem 1.75rem;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: var(--r);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.btn-main:hover {
+  background: #ea6c0e;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(249,115,22,0.3);
+}
+
+.btn-main:focus-visible,
+.btn-ghost:focus-visible,
+.fc-link:focus-visible,
+.c-link:focus-visible,
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.btn-ghost {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0.72rem 1.75rem;
+  background: transparent;
+  color: var(--text-2);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-1px);
+}
+
+/* BENTO GRID (hero right) */
+.bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.bento-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.25rem;
+  transition: border-color 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  transform: translateY(-2px);
+}
+
+.bento-card.b-orange { border-top: 2px solid var(--orange); }
+.bento-card.b-orange:hover { border-color: rgba(249,115,22,0.45); border-top-color: var(--orange); }
+
+.bento-card.b-violet { border-top: 2px solid var(--violet); }
+.bento-card.b-violet:hover { border-color: rgba(139,92,246,0.45); border-top-color: var(--violet); }
+
+.bento-card.b-green { border-top: 2px solid var(--green); }
+.bento-card.b-green:hover { border-color: rgba(34,197,94,0.45); border-top-color: var(--green); }
+
+.bento-card.b-neutral { border-top: 2px solid var(--border-2); }
+.bento-card.b-neutral:hover { border-color: var(--border-2); }
+
+.bento-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  margin-bottom: 0.9rem;
+}
+.b-orange .bento-dot { background: var(--orange); }
+.b-violet .bento-dot { background: var(--violet); }
+.b-green  .bento-dot { background: var(--green); }
+.b-neutral .bento-dot { background: var(--text-3); }
+
+.bento-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.b-orange .bento-num { color: var(--orange); }
+.b-violet .bento-num { color: var(--violet); }
+.b-green  .bento-num { color: var(--green); }
+.b-neutral .bento-num { color: var(--text); }
+
+.bento-lbl {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+  line-height: 1.3;
+}
+
+.bento-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-3);
+  margin-top: 0.5rem;
+}
+
+/* ─── SECTIONS ────────────────────────────────────────────────────────────── */
+.section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 5.5rem 3rem;
+}
+
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.section-sub {
+  font-size: 1rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+/* ─── ABOUT ───────────────────────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-body {
+  font-size: 1.02rem;
+  color: var(--text-2);
+  line-height: 1.85;
+  font-weight: 300;
+}
+
+.about-body p { margin-bottom: 1.1rem; }
+
+.about-body strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.about-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.astat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.astat:hover {
+  border-color: var(--border-2);
+  transform: translateX(3px);
+}
+
+.astat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--orange);
+  min-width: 60px;
+}
+
+.astat-txt {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+
+/* ─── PROJECTS ────────────────────────────────────────────────────────────── */
+
+/* Featured (2-col) */
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.featured-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 2rem;
+  transition: border-color 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.featured-card:hover {
+  border-color: var(--border-2);
+  transform: translateY(-3px);
+}
+
+.featured-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(249,115,22,0.035) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.featured-card:hover::before { opacity: 1; }
+
+.fc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.fc-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--orange);
+  text-transform: uppercase;
+  background: var(--orange-soft);
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+}
+
+.fc-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+}
+
+.fc-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.fc-desc {
+  font-size: 0.9rem;
+  color: var(--text-2);
+  line-height: 1.75;
+  font-weight: 300;
+  flex: 1;
+}
+
+.fc-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.metric-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  background: var(--orange-soft);
+  color: var(--orange);
+  border: 1px solid rgba(249,115,22,0.2);
+}
+
+.metric-pill.v {
+  background: var(--violet-soft);
+  color: var(--violet);
+  border-color: rgba(139,92,246,0.2);
+}
+
+.fc-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.fc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-2);
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.fc-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--orange);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.fc-link:hover { opacity: 0.75; }
+
+/* Regular project grid (3-col) */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.proj-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.5rem;
+  transition: border-color 0.25s, transform 0.25s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.proj-card:hover {
+  border-color: var(--border-2);
+  transform: translateY(-2px);
+}
+
+.proj-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 1px;
+}
+
+.proj-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.proj-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-3);
+}
+
+.proj-desc {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  font-weight: 300;
+  flex: 1;
+}
+
+.proj-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.25rem;
+}
+
+/* ─── SKILLS ──────────────────────────────────────────────────────────────── */
+.skills-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 4rem;
+}
+
+.skill-group {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-group:last-child { border-bottom: none; }
+
+.sg-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 0.9rem;
+}
+
+.sg-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sk-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+
+.sk-tag:hover {
+  color: var(--orange);
+  border-color: rgba(249,115,22,0.3);
+  background: var(--orange-soft);
+}
+
+/* ─── TIMELINE ────────────────────────────────────────────────────────────── */
+.timeline {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--orange) 0%, var(--border) 70%, transparent 100%);
+}
+
+.tl-item {
+  position: relative;
+  padding-bottom: 2.75rem;
+}
+
+.tl-item:last-child { padding-bottom: 0; }
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -2.5rem;
+  top: 6px;
+  width: 9px; height: 9px;
+  border-radius: 2px;
+  background: var(--bg-card-2);
+  border: 1.5px solid var(--orange);
+  transform: rotate(45deg);
+  transition: background 0.2s;
+}
+
+.tl-item:hover::before {
+  background: var(--orange);
+}
+
+.tl-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--orange);
+  letter-spacing: 1px;
+  margin-bottom: 0.35rem;
+}
+
+.tl-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.15rem;
+  letter-spacing: -0.01em;
+}
+
+.tl-org {
+  font-size: 0.875rem;
+  color: var(--violet);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.tl-detail {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* ─── CONTACT ─────────────────────────────────────────────────────────────── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.contact-body {
+  font-size: 1rem;
+  color: var(--text-2);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.c-link {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  text-decoration: none;
+  color: var(--text-2);
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.c-link:hover {
+  border-color: rgba(249,115,22,0.3);
+  color: var(--orange);
+  transform: translateX(4px);
+}
+
+.c-icon {
+  font-size: 15px;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-note {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  line-height: 1.5;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.85rem 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(249,115,22,0.35);
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.06);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-3);
+  font-size: 0.875rem;
+}
+
+/* ─── FOOTER ──────────────────────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 1.5px;
+}
+
+/* ─── DIVIDER ─────────────────────────────────────────────────────────────── */
+.divider {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+.divider hr {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── REVEAL ANIMATION ────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── HERO ENTRANCE ───────────────────────────────────────────────────────── */
+.hero-left .hero-badge   { animation: fadeUp 0.5s 0.1s both; }
+.hero-left .hero-name    { animation: fadeUp 0.5s 0.22s both; }
+.hero-left .hero-role    { animation: fadeUp 0.5s 0.32s both; }
+.hero-left .hero-desc    { animation: fadeUp 0.5s 0.42s both; }
+.hero-left .hero-ctas    { animation: fadeUp 0.5s 0.52s both; }
+.hero-right .bento       { animation: fadeUp 0.5s 0.3s both; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .featured-grid { grid-template-columns: 1fr; }
+  .proj-grid { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+@media (max-width: 860px) {
+  #hero { grid-template-columns: 1fr; padding-top: 7rem; }
+  .hero-right { max-width: 560px; }
+  .bento-card { padding: 1rem; }
+  .skills-layout { grid-template-columns: 1fr; }
+  nav { padding: 0 1.5rem; }
+  .nav-links { gap: 1.25rem; }
+  .section { padding: 4rem 1.5rem; }
+}
+
+@media (max-width: 600px) {
+  .proj-grid { grid-template-columns: 1fr; }
+  #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .bento { grid-template-columns: 1fr 1fr; }
+  .bento-num { font-size: 1.35rem; }
+  .bento-lbl { font-size: 0.76rem; }
+  .nav-links { gap: 0.85rem; }
+  .nav-links a { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div id="sp"></div>
+
+<nav>
+  <div class="nav-logo">satya<span>.</span>dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Available for Hire</div>
+    <h1 class="hero-name">P P Satya<br><span class="highlight">Karthikeya</span></h1>
+    <p class="hero-role">AI Engineer &nbsp;·&nbsp; MLOps &nbsp;·&nbsp; Deep Learning</p>
+    <p class="hero-desc">
+      I build machine learning systems that go beyond the notebook — deployed,
+      monitored, and running in production. From power grid inspection to medical AI,
+      I care about the full pipeline.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-main">View Projects</a>
+      <a href="Resume%20(2).pdf" class="btn-ghost" download>Resume</a>
+      <a href="https://github.com/satyakarthikeya" target="_blank" rel="noopener noreferrer" class="btn-ghost">GitHub ↗</a>
+      <a href="mailto:satyakarthikeya17@gmail.com" class="btn-ghost">Contact</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="bento">
+      <div class="bento-card b-orange">
+        <div class="bento-dot"></div>
+        <div class="bento-num" data-target="96.10" data-suffix="%" data-decimal="true">96.10%</div>
+        <div class="bento-lbl">mAP50 · Insulator Defect AI</div>
+        <div class="bento-sub">Edge · ONNX · TensorRT</div>
+      </div>
+      <div class="bento-card b-violet">
+        <div class="bento-dot"></div>
+        <div class="bento-num" data-target="7" data-suffix="B">7B</div>
+        <div class="bento-lbl">Params Fine-Tuned</div>
+        <div class="bento-sub">Mistral · QLoRA · HITL</div>
+      </div>
+      <div class="bento-card b-green">
+        <div class="bento-dot"></div>
+        <div class="bento-num" data-target="99" data-suffix="%">99%</div>
+        <div class="bento-lbl">Accuracy · Heart Sound AI</div>
+        <div class="bento-sub">CNN-LSTM · FastAPI · Docker</div>
+      </div>
+      <div class="bento-card b-neutral">
+        <div class="bento-dot"></div>
+        <div class="bento-num" data-target="5" data-suffix="+">5+</div>
+        <div class="bento-lbl">Production ML Systems</div>
+        <div class="bento-sub">Research → Deployment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ── ABOUT ─────────────────────────────────────────────────────────────── -->
+<section id="about" class="section">
+  <div class="section-tag">01 · About</div>
+  <h2 class="section-title reveal">Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-body reveal">
+      <p>
+        I'm a <strong>B.Tech AI &amp; Data Science</strong> student at Amrita Vishwa
+        Vidyapeetham, Coimbatore — but I spend most of my time building real ML systems,
+        not just studying theory.
+      </p>
+      <p>
+        My focus is on the <strong>full ML lifecycle</strong> — understanding a problem,
+        choosing the right architecture, training it properly, and then actually getting
+        it running in production with Docker, FastAPI, and monitoring in place.
+      </p>
+      <p>
+        I've worked across <strong>computer vision, NLP, medical signal processing,
+        and LLM fine-tuning</strong>. My latest project deploys a custom YOLO model
+        on edge devices like Raspberry Pi for real-world power grid inspection.
+      </p>
+      <p>
+        Looking for <strong>AI Engineer or MLOps roles</strong> where I can ship models
+        that actually matter.
+      </p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="astat">
+        <div class="astat-num" data-target="5" data-suffix="+">5+</div>
+        <div class="astat-txt">Deployed production ML systems</div>
+      </div>
+      <div class="astat">
+        <div class="astat-num" data-target="99" data-suffix="%">99%</div>
+        <div class="astat-txt">Best model accuracy achieved</div>
+      </div>
+      <div class="astat">
+        <div class="astat-num" data-target="7" data-suffix="B">7B</div>
+        <div class="astat-txt">Model parameters fine-tuned</div>
+      </div>
+      <div class="astat">
+        <div class="astat-num" data-target="7.84" data-decimal="true">7.84</div>
+        <div class="astat-txt">CGPA at Amrita University</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ── PROJECTS ──────────────────────────────────────────────────────────── -->
+<section id="projects" class="section">
+  <div class="section-tag">02 · Projects</div>
+  <h2 class="section-title reveal">Things I've Built</h2>
+  <p class="section-sub reveal">End-to-end ML systems — from dataset curation and model design to containerized deployment and monitoring.</p>
+
+  <!-- Featured Projects -->
+  <div class="featured-grid">
+
+    <div class="featured-card reveal">
+      <div class="fc-header">
+        <span class="fc-cat">Computer Vision · Edge AI</span>
+        <span class="fc-date">2024 — 2025</span>
+      </div>
+      <div class="fc-title">Insulator Defect Detection System</div>
+      <p class="fc-desc">
+        Power transmission lines need regular inspection, but sending people up
+        towers is dangerous and expensive. This project uses a custom-designed
+        <strong style="color:var(--text);font-weight:500;">Ghost-Hybrid YOLO11</strong>
+        model to detect damaged insulators from drone/camera footage — and it runs
+        directly on affordable edge hardware like <strong style="color:var(--text);font-weight:500;">Raspberry Pi</strong>
+        and <strong style="color:var(--text);font-weight:500;">NVIDIA Jetson</strong>.
+        Exported to ONNX, TensorRT, and TFLite for flexible deployment.
+      </p>
+      <div>
+        <div style="font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:0.6rem;text-transform:uppercase;">Key Results</div>
+        <div class="fc-metrics">
+          <span class="metric-pill">96.10% mAP50</span>
+          <span class="metric-pill">868K params</span>
+          <span class="metric-pill">5.7 GFLOPs</span>
+          <span class="metric-pill">Pi + Jetson Ready</span>
+        </div>
+      </div>
+      <div class="fc-footer">
+        <div class="fc-tags">
+          <span class="tag">YOLO11</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">ONNX</span>
+          <span class="tag">TensorRT</span>
+          <span class="tag">TFLite</span>
+          <span class="tag">NumPy</span>
+        </div>
+        <a href="https://github.com/satyakarthikeya/InsulatorDefect" target="_blank" rel="noopener noreferrer" class="fc-link">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="featured-card reveal">
+      <div class="fc-header">
+        <span class="fc-cat" style="background:var(--violet-soft);color:var(--violet);border-radius:99px;padding:0.25rem 0.65rem;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;">LLM Fine-Tuning · NLP</span>
+        <span class="fc-date">Jul — Sep 2025</span>
+      </div>
+      <div class="fc-title">MedChat: Medical AI Assistant</div>
+      <p class="fc-desc">
+        Fine-tuned <strong style="color:var(--text);font-weight:500;">Mistral 7B</strong>
+        on real medical dialogues using QLoRA — making it possible to train a 7-billion
+        parameter model on consumer hardware with 4-bit quantization. Includes a
+        <strong style="color:var(--text);font-weight:500;">Human-in-the-Loop</strong>
+        pipeline: the model flags its own uncertain responses for doctor review,
+        then learns from that feedback. Dynamic few-shot prompting makes responses
+        feel more empathetic and contextually appropriate.
+      </p>
+      <div>
+        <div style="font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:0.6rem;text-transform:uppercase;">Key Results</div>
+        <div class="fc-metrics">
+          <span class="metric-pill v">Mistral 7B base</span>
+          <span class="metric-pill v">4-bit quantized</span>
+          <span class="metric-pill v">HITL pipeline</span>
+          <span class="metric-pill v">Active learning</span>
+        </div>
+      </div>
+      <div class="fc-footer">
+        <div class="fc-tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">QLoRA</span>
+          <span class="tag">PEFT</span>
+          <span class="tag">HuggingFace</span>
+          <span class="tag">BitsAndBytes</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Regular Projects -->
+  <div class="proj-grid">
+
+    <div class="proj-card reveal">
+      <div class="proj-num">PROJ · 03</div>
+      <div class="proj-title">Pharmaceutical Info Extractor</div>
+      <div class="proj-date">Sep 2025</div>
+      <p class="proj-desc">
+        Scan a medicine packet, get structured data back. Combines Google Cloud Vision OCR
+        to read text from packaging images and Gemini API to extract dosage, side effects,
+        and interactions — served through a FastAPI + React.js interface.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">FastAPI</span>
+        <span class="tag">React.js</span>
+        <span class="tag">Cloud Vision</span>
+        <span class="tag">Gemini API</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-num">PROJ · 04</div>
+      <div class="proj-title">Heart Sound Classification</div>
+      <div class="proj-date">Jul — Nov 2024</div>
+      <p class="proj-desc">
+        Detects cardiac abnormalities (AS, MS, MR, MVP) by analysing heart sound
+        recordings. A hybrid CNN-LSTM model processes MFCC, Log Mel, and Wav2Vec
+        audio features. Full deployment pipeline: FastAPI + Docker. <strong style="color:var(--text);font-weight:500;">99% accuracy</strong>.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">CNN-LSTM</span>
+        <span class="tag">Librosa</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Docker</span>
+        <span class="tag">XGBoost</span>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-num">PROJ · 05</div>
+      <div class="proj-title">Hand Sign Recognition</div>
+      <div class="proj-date">Dec 2024 — Apr 2025</div>
+      <p class="proj-desc">
+        Real-time sign language and digit recognition using a 3-model pipeline: YOLOv8
+        for hand detection, MediaPipe for 21-point landmark tracking, and VGG/ResNet
+        for classification. Includes a dynamic dataset creation tool.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">YOLOv8</span>
+        <span class="tag">MediaPipe</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">OpenCV</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ── SKILLS ─────────────────────────────────────────────────────────────── -->
+<section id="skills" class="section">
+  <div class="section-tag">03 · Skills</div>
+  <h2 class="section-title reveal">Tech Stack</h2>
+  <p class="section-sub reveal">Tools and technologies I use regularly in research and production.</p>
+
+  <div class="skills-layout reveal">
+    <div class="skill-group">
+      <div class="sg-title">ML / Deep Learning</div>
+      <div class="sg-tags">
+        <span class="sk-tag">PyTorch</span>
+        <span class="sk-tag">TensorFlow</span>
+        <span class="sk-tag">HuggingFace</span>
+        <span class="sk-tag">QLoRA / PEFT</span>
+        <span class="sk-tag">Scikit-learn</span>
+        <span class="sk-tag">Librosa</span>
+        <span class="sk-tag">BitsAndBytes</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="sg-title">Computer Vision</div>
+      <div class="sg-tags">
+        <span class="sk-tag">OpenCV</span>
+        <span class="sk-tag">YOLOv8 / YOLO11</span>
+        <span class="sk-tag">MediaPipe</span>
+        <span class="sk-tag">CNN / ResNet / VGG</span>
+        <span class="sk-tag">Image Segmentation</span>
+        <span class="sk-tag">ONNX Runtime</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="sg-title">Deployment & MLOps</div>
+      <div class="sg-tags">
+        <span class="sk-tag">Docker</span>
+        <span class="sk-tag">FastAPI</span>
+        <span class="sk-tag">GitHub Actions</span>
+        <span class="sk-tag">TensorRT</span>
+        <span class="sk-tag">TFLite INT8</span>
+        <span class="sk-tag">Model Quantization</span>
+        <span class="sk-tag">Edge Inference</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="sg-title">Languages & Tools</div>
+      <div class="sg-tags">
+        <span class="sk-tag">Python</span>
+        <span class="sk-tag">React.js</span>
+        <span class="sk-tag">Linux / Bash</span>
+        <span class="sk-tag">Git / GitHub</span>
+        <span class="sk-tag">NumPy / Pandas</span>
+        <span class="sk-tag">Jupyter</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="sg-title">AI Domains</div>
+      <div class="sg-tags">
+        <span class="sk-tag">LLM Fine-tuning</span>
+        <span class="sk-tag">Signal Processing</span>
+        <span class="sk-tag">Active Learning</span>
+        <span class="sk-tag">OCR & Document AI</span>
+        <span class="sk-tag">Prompt Engineering</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="sg-title">Cloud & APIs</div>
+      <div class="sg-tags">
+        <span class="sk-tag">Google Cloud Vision</span>
+        <span class="sk-tag">Gemini API</span>
+        <span class="sk-tag">Raspberry Pi</span>
+        <span class="sk-tag">NVIDIA Jetson</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ── EXPERIENCE ─────────────────────────────────────────────────────────── -->
+<section id="experience" class="section">
+  <div class="section-tag">04 · Experience & Education</div>
+  <h2 class="section-title reveal">Timeline</h2>
+
+  <div class="timeline">
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2023 — PRESENT</div>
+      <div class="tl-title">B.Tech — AI & Data Science Engineering</div>
+      <div class="tl-org">Amrita Vishwa Vidyapeetham · Coimbatore, TN</div>
+      <div class="tl-detail">CGPA: 7.84 / 10.0 &nbsp;·&nbsp; Coursework: Computer Vision, NLP, Reinforcement Learning, Signal Processing, MLOps</div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2024 — 2025</div>
+      <div class="tl-title">Insulator Defect Detection · Edge AI</div>
+      <div class="tl-org">Independent Research Project</div>
+      <div class="tl-detail">Custom YOLO11 architecture with Ghost-Hybrid P3P4 design. Multi-format export for Raspberry Pi, Jetson Nano, and GPU inference. 96.10% mAP50 with only 868K parameters.</div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">Jul — Sep 2025</div>
+      <div class="tl-title">MedChat · Medical LLM Fine-tuning</div>
+      <div class="tl-org">Independent Project</div>
+      <div class="tl-detail">Fine-tuned Mistral 7B using QLoRA on curated medical dialogue datasets. Built a HITL active-learning loop with entropy-based routing to continuously improve response quality.</div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">Sep 2025</div>
+      <div class="tl-title">Pharmaceutical Information System</div>
+      <div class="tl-org">Independent Project</div>
+      <div class="tl-detail">End-to-end full-stack app combining OCR and LLM to extract structured data from medicine packaging. FastAPI backend, React.js frontend, Google Cloud Vision + Gemini API.</div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">Dec 2024 — Apr 2025</div>
+      <div class="tl-title">Hand Sign Recognition System</div>
+      <div class="tl-org">Independent Project</div>
+      <div class="tl-detail">Real-time multi-model pipeline: YOLO for detection → MediaPipe for landmarks → ResNet/VGG for classification. Supports custom dataset creation and live inference.</div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">Jul — Nov 2024</div>
+      <div class="tl-title">Heart Sound Classification · Medical AI</div>
+      <div class="tl-org">Independent Project</div>
+      <div class="tl-detail">Cardiac abnormality detection from audio recordings using a hybrid CNN-LSTM model on MFCC + Wav2Vec embeddings. Deployed via FastAPI + Docker with 99% test accuracy.</div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-date">2021 — 2023</div>
+      <div class="tl-title">Higher Secondary School</div>
+      <div class="tl-org">SASI Educational Institute · Velivennu, AP</div>
+      <div class="tl-detail">Percentage: 94.4%</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ── CONTACT ────────────────────────────────────────────────────────────── -->
+<section id="contact" class="section">
+  <div class="section-tag">05 · Contact</div>
+  <h2 class="section-title reveal">Get In Touch</h2>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-body reveal">
+        Open to <strong style="color:var(--text);font-weight:500;">AI Engineer and MLOps roles</strong>,
+        internships, and research collaborations. If you're building something serious with ML —
+        especially in computer vision, edge AI, or LLM systems — I'd love to talk.
+      </p>
+      <div class="contact-links reveal">
+        <a href="mailto:satyakarthikeya17@gmail.com" class="c-link">
+          <span class="c-icon">✉</span>
+          satyakarthikeya17@gmail.com
+        </a>
+        <a href="https://github.com/satyakarthikeya" target="_blank" rel="noopener noreferrer" class="c-link">
+          <span class="c-icon">⌥</span>
+          github.com/satyakarthikeya
+        </a>
+        <a href="Resume%20(2).pdf" class="c-link" download>
+          <span class="c-icon">▣</span>
+          Download resume
+        </a>
+        <a href="tel:+917815923423" class="c-link">
+          <span class="c-icon">◈</span>
+          +91 78159 23423
+        </a>
+      </div>
+    </div>
+    <form class="contact-form reveal" id="contactForm">
+      <input type="text" name="name" placeholder="Your name" aria-label="Your name" required />
+      <input type="email" name="email" placeholder="Your email" aria-label="Your email" required />
+      <textarea rows="4" name="message" placeholder="Your message" aria-label="Your message" required></textarea>
+      <button class="btn-main" type="submit" style="width:100%;font-size:13px;">Send Email</button>
+      <p class="form-note">This opens your email app with the message filled in.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  &copy; <span id="year"></span> · P P SATYA KARTHIKEYA · BUILT WITH PURPOSE
+</footer>
+
+<script>
+var year = document.getElementById('year');
+if (year) year.textContent = new Date().getFullYear();
+
+var contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = new FormData(contactForm);
+    var name = (data.get('name') || '').toString().trim();
+    var email = (data.get('email') || '').toString().trim();
+    var message = (data.get('message') || '').toString().trim();
+    var body = 'Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message;
+    window.location.href = 'mailto:satyakarthikeya17@gmail.com?subject=' +
+      encodeURIComponent('Portfolio inquiry from ' + name) +
+      '&body=' + encodeURIComponent(body);
+  });
+}
+
+// ── SCROLL PROGRESS ──────────────────────────────────────────────────────────
+var sp = document.getElementById('sp');
+window.addEventListener('scroll', function () {
+  var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+  sp.style.width = (pct * 100) + '%';
+}, { passive: true });
+
+// ── COUNTER ANIMATION ────────────────────────────────────────────────────────
+function runCounter(el) {
+  if (el.dataset.counted) return;
+  el.dataset.counted = '1';
+  var target  = parseFloat(el.dataset.target);
+  var suffix  = el.dataset.suffix || '';
+  var decimal = el.dataset.decimal === 'true';
+  var dur     = 1300;
+  var start   = performance.now();
+  (function tick(now) {
+    var p    = Math.min((now - start) / dur, 1);
+    var ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = (decimal ? (target * ease).toFixed(2) : Math.round(target * ease)) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  })(start);
+}
+
+// ── INTERSECTION OBSERVER ────────────────────────────────────────────────────
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (e, i) {
+    if (!e.isIntersecting) return;
+    setTimeout(function () {
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('[data-target]').forEach(runCounter);
+      if (e.target.dataset.target) runCounter(e.target);
+    }, i * 70);
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal, [data-target]').forEach(function (el) {
+  io.observe(el);
+});
+
+// ── ACTIVE NAV ───────────────────────────────────────────────────────────────
+var secs = document.querySelectorAll('section[id]');
+var links = document.querySelectorAll('.nav-links a');
+var nio = new IntersectionObserver(function (entries) {
+  entries.forEach(function (e) {
+    if (!e.isIntersecting) return;
+    links.forEach(function (a) { a.classList.remove('active'); });
+    var a = document.querySelector('.nav-links a[href="#' + e.target.id + '"]');
+    if (a) a.classList.add('active');
+  });
+}, { threshold: 0.4 });
+secs.forEach(function (s) { nio.observe(s); });
+
+// ── SMOOTH SCROLL ────────────────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    var t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
